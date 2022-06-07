@@ -2,27 +2,27 @@ package com.qa.ims.persistence.domain;
 
 public class Items {
 	
-	private Long items_id;
+	private Long itemsId;
 	private double value;
-	private String item_name;
+	private String itemName;
 	
-	public Items(double value, String item_name) {
+	public Items(double value, String itemName) {
 		this.setValue(value);
-		this.setItemName(item_name);
+		this.setItemName(itemName);
 	}
 	
-	public Items (Long items_id, double value, String item_name) {
-		this.setItemsId(items_id);
+	public Items (Long itemsId, double value, String itemName) {
+		this.setItemsId(itemsId);
 		this.setValue(value);
-		this.setItemName(item_name);
+		this.setItemName(itemName);
 	}
 
 	public Long getItemsId() {
-		return items_id;
+		return itemsId;
 	}
 
-	public void setItemsId(Long items_id) {
-		this.items_id = items_id;
+	public void setItemsId(Long itemsId) {
+		this.itemsId = itemsId;
 	}
 
 	public double getValue() {
@@ -34,21 +34,21 @@ public class Items {
 	}
 
 	public String getItemName() {
-		return item_name;
+		return itemName;
 	}
 
-	public void setItemName(String item_name) {
-		this.item_name = item_name;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 	
 	@Override
 	public String toString() {
-		return "id:" + items_id + " value : £" + value + " item name:" + item_name;
+		return "id:" + itemsId + " value : £" + value + " item name:" + itemName;
 	}
 
 //	@Override
 //	public int hashCode() {
-//		return Objects.hash(item_name, items_id, value);
+//		return Objects.hash(itemName, itemsId, value);
 //	}
 //
 //	@Override
@@ -60,7 +60,7 @@ public class Items {
 //		if (getClass() != obj.getClass())
 //			return false;
 //		Items other = (Items) obj;
-//		return Objects.equals(item_name, other.item_name) && Objects.equals(items_id, other.items_id)
+//		return Objects.equals(itemName, other.itemName) && Objects.equals(itemsId, other.itemsId)
 //				&& Double.doubleToLongBits(value) == Double.doubleToLongBits(other.value);
 //	}	
 	

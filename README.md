@@ -1,7 +1,7 @@
 Coverage: 34%
 # Project Title
 
-One Paragraph of project description goes here
+This is the week 5 QA Academy Project to design an application that handles an Inventory Management System.
 
 ## Getting Started
 
@@ -70,11 +70,12 @@ Add additional notes about how to deploy this on a live system
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning.
+We use [Git with GitHub](http://GitHub.com/) for version control.
 
 ## Authors
 
-* **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
+* **Jordan Benbelaid** - *Initial work* - [jordanbenbelaid](https://github.com/jordanbenbelaid)
+* **Lewis Pearson** - *Final project* - [lewispearson](https://github.com/LewisPearsonGitHub)
 
 ## License
 
@@ -84,8 +85,5 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-# IMS-Start
-# IMS-Start
+* Thanks to the trainers Cameron Guthrie and Jordan Benbelaid for brilliant teaching
+* that gave me the knowledge to complete this project.

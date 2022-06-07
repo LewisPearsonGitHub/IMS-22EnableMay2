@@ -1,7 +1,5 @@
 package com.qa.ims.persistence.domain;
 
-import java.util.Objects;
-
 public class Items {
 	
 	private Long items_id;
@@ -48,23 +46,23 @@ public class Items {
 		return "id:" + items_id + " value : £" + value + " item name:" + item_name;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(item_name, items_id, value);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Items other = (Items) obj;
-		return Objects.equals(item_name, other.item_name) && Objects.equals(items_id, other.items_id)
-				&& Double.doubleToLongBits(value) == Double.doubleToLongBits(other.value);
-	}	
+//	@Override
+//	public int hashCode() {
+//		return Objects.hash(item_name, items_id, value);
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Items other = (Items) obj;
+//		return Objects.equals(item_name, other.item_name) && Objects.equals(items_id, other.items_id)
+//				&& Double.doubleToLongBits(value) == Double.doubleToLongBits(other.value);
+//	}	
 	
 	
 	

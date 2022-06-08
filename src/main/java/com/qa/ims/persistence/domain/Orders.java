@@ -6,7 +6,9 @@ public class Orders {
 	private Long orderId;
 	private Customer customer;
 	
-	
+	public Customer getCustomerID() {
+		return customer;
+	}
 	
 	public Orders(Long orderId, Customer customer) {
 		this.orderId = orderId;
@@ -15,6 +17,8 @@ public class Orders {
 	public Orders(Customer customer) {
 		this.customer = customer;
 	}
+
+
 
 
 	public Long getOrderId() {

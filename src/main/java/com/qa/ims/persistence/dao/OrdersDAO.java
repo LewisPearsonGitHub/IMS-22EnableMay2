@@ -11,34 +11,38 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.qa.ims.persistence.domain.Items;
+import com.qa.ims.persistence.domain.Orders;
 import com.qa.ims.utils.DBUtils;
+import com.qa.ims.persistence.domain.Customer;
 
-public class ItemsDAO implements Dao<Items>{
-	
+public class OrdersDAO implements Dao<Orders>{
 	public static final Logger LOGGER = LogManager.getLogger();
 	
+	
+	
+	
+	
 	@Override
-	public Items modelFromResultSet(ResultSet resultSet) throws SQLException {
-		Long itemsId = resultSet.getLong("items_id");
-		double value = resultSet.getDouble("value");
-		String itemName = resultSet.getString("item_name");
-		return new Items(itemsId, value, itemName);
+	public Orders modelFromResultSet(ResultSet resultSet) throws SQLException {
+		Long ordersId = resultSet.getLong("orders_id");
+		Long customerId = resultSet.getLong("fk_customers_id");
+		String firstName = resultSet.getString("first_name");
+		String surname = resultSet.getString("surname");
+		Customer customer = new Customer(customerId, firstName, surname);
+		
+		return new Orders(ordersId, customer);
 	}
 
-	
-	// Reads all customers from the database
-	
 	@Override
-	public List<Items> readAll() {
+	public List<Orders> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM items");) {
-			List<Items> items = new ArrayList<>();
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders JOIN customers ON customers.customers_id = orders.fk_customers_id");) {
+			List<Orders> orders = new ArrayList<>();
 			while (resultSet.next()) {
-				items.add(modelFromResultSet(resultSet));
+				orders.add(modelFromResultSet(resultSet));
 			}
-			return items;
+			return orders;
 		} catch (SQLException e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
@@ -46,10 +50,10 @@ public class ItemsDAO implements Dao<Items>{
 		return new ArrayList<>();
 	}
 	
-	public Items readLatest() {
+	public Orders readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY items_id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY orders_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -60,12 +64,11 @@ public class ItemsDAO implements Dao<Items>{
 	}
 	
 	@Override
-	public Items create(Items item) {
+	public Orders create(Orders order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO items(value, item_name) VALUES (?, ?)");) {
-			statement.setDouble(1, item.getValue());
-			statement.setString(2, item.getItemName());
+						.prepareStatement("INSERT INTO orders(fk_customers_id) VALUES (?)");) {
+			statement.setLong(1, order.getCustomer().getId());
 			statement.executeUpdate();
 			return readLatest();
 		} catch (Exception e) {
@@ -76,10 +79,10 @@ public class ItemsDAO implements Dao<Items>{
 	}
 
 	@Override
-	public Items read(Long itemsId) {
+	public Orders read(Long ordersId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM items WHERE items_id = ?");) {
-			statement.setLong(1, itemsId);
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE orders_id = ?");) {
+			statement.setLong(1, ordersId);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
 				return modelFromResultSet(resultSet);
@@ -94,15 +97,14 @@ public class ItemsDAO implements Dao<Items>{
 	
 
 	@Override
-	public Items update(Items item) {
+	public Orders update(Orders order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("UPDATE items SET value = ?, item_name= ? WHERE items_id = ?");) {
-			statement.setDouble(1, item.getValue());
-			statement.setString(2, item.getItemName());
-			statement.setLong(3, item.getItemsId());
+						.prepareStatement("UPDATE orders SET fk_customers_id = ? WHERE orders_id = ?");) {
+			statement.setLong(1, order.getCustomer().getId());
+			statement.setLong(2, order.getOrderId());
 			statement.executeUpdate();
-			return read(item.getItemsId());
+			return read(order.getOrderId());
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
@@ -111,10 +113,10 @@ public class ItemsDAO implements Dao<Items>{
 	}
 
 	@Override
-	public int delete(long itemsId) {
+	public int delete(long ordersId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("DELETE FROM items WHERE items_id= ?");) {
-			statement.setLong(1, itemsId);
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders WHERE orders_id= ?");) {
+			statement.setLong(1, ordersId);
 			return statement.executeUpdate();
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -123,7 +125,3 @@ public class ItemsDAO implements Dao<Items>{
 		return 0;
 	}
 }
-
-	
-
-

@@ -21,6 +21,10 @@ public class Orders {
 
 
 
+	public Orders() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getOrderId() {
 		return orderId;
 	}

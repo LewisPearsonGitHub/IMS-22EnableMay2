@@ -4,15 +4,15 @@ public class OrdersItems {
 	private Long orderItemsId;
 	private Items items;
 	private Orders orders;
-	private int quantity;
+	private Long quantity;
 	
-	public OrdersItems(Items items, Orders orders, int quantity) {
+	public OrdersItems(Items items, Orders orders, Long quantity) {
 		this.setItems(items);
 		this.setOrders(orders);
 		this.setQuantity(quantity);
 		
 	}
-	public OrdersItems(Long orderItemsId, Items items, Orders orders, int quantity) {
+	public OrdersItems(Long orderItemsId, Items items, Orders orders, Long quantity) {
 		this.setOrderItemsId(orderItemsId);
 		this.setItems(items);
 		this.setOrders(orders);
@@ -36,11 +36,16 @@ public class OrdersItems {
 	public void setOrders(Orders orders) {
 		this.orders = orders;
 	}
-	public int getQuantity() {
+	public Long getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
+	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
+	}
+	@Override
+	public String toString() {
+		return "OrdersItems [orderItemsId=" + orderItemsId + ", items=" + items + ", orders=" + orders + ", quantity="
+				+ quantity + "]";
 	}
 	
 	

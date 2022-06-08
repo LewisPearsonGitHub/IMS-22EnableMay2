@@ -23,10 +23,10 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 	
 	@Override
 	public OrdersItems modelFromResultSet(ResultSet resultSet) throws SQLException {
-		Long ordersItemsId = resultSet.getLong("orders_items_id");
+		Long orderItemsId = resultSet.getLong("orders_items_id");
 		Long itemsId = resultSet.getLong("fk_items_id");
 		Long ordersId = resultSet.getLong("fk_orders_id");
-		int quantity = resultSet.getInt("quantity");
+		Long quantity = resultSet.getLong("quantity");
 				
 		double value = resultSet.getDouble("value");
 		String itemName = resultSet.getString("item_name");
@@ -40,7 +40,7 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 		Orders orders = new Orders(ordersId, customer);
 		
 		
-		return new OrdersItems(ordersItemsId, items, orders, quantity);
+		return new OrdersItems(orderItemsId, items, orders, quantity);
 	}
 	
 	@Override
@@ -63,7 +63,7 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 	public OrdersItems readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders_items ORDER BY orders__items_id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders_items ORDER BY orders_items_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -79,8 +79,8 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 				PreparedStatement statement = connection
 						.prepareStatement("INSERT INTO orders_items(fk_items_id, fk_orders_id, quantity) VALUES (?, ?, ?)");) {
 			statement.setLong(1, ordersItems.getItems().getItemsId());
-			statement.setLong(1, ordersItems.getOrders().getOrderId());
-			statement.setInt(1, ordersItems.getQuantity());
+			statement.setLong(2, ordersItems.getOrders().getOrderId());
+			statement.setLong(3, ordersItems.getQuantity());
 			statement.executeUpdate();
 			return readLatest();
 		} catch (Exception e) {
@@ -115,7 +115,7 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 						.prepareStatement("UPDATE orders_items SET fk_items_id= ?, fk_orders_id=?,quantity=? WHERE orders_items_id = ?");) {
 			statement.setLong(1, ordersItems.getItems().getItemsId());
 			statement.setLong(1, ordersItems.getOrders().getOrderId());
-			statement.setInt(1, ordersItems.getQuantity());
+			statement.setLong(1, ordersItems.getQuantity());
 			statement.executeUpdate();
 			return read(ordersItems.getOrderItemsId());
 		} catch (Exception e) {

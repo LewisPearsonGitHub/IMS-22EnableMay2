@@ -17,6 +17,10 @@ public class Items {
 		this.setItemName(itemName);
 	}
 
+	public Items() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getItemsId() {
 		return itemsId;
 	}

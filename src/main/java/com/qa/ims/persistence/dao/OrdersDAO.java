@@ -30,14 +30,15 @@ public class OrdersDAO implements Dao<Orders>{
 		String surname = resultSet.getString("surname");
 		Customer customer = new Customer(customerId, firstName, surname);
 		
-		return new Orders(ordersId, customer);
+		Long cost = resultSet.getLong("cost");
+		return new Orders(ordersId, customer, cost);
 	}
 
 	@Override
 	public List<Orders> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders JOIN customers ON customers.customers_id = orders.fk_customers_id");) {
+				ResultSet resultSet = statement.executeQuery("SELECT orders_id, fk_customers_id, sum(quantity*`value`) AS 'cost', first_name, surname FROM orders o JOIN customers c ON c.customers_id = o.fk_customers_id JOIN orders_items oi ON oi.fk_orders_id = o.orders_id JOIN items i ON oi.fk_items_id=i.items_id GROUP BY orders_id");) {
 			List<Orders> orders = new ArrayList<>();
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));

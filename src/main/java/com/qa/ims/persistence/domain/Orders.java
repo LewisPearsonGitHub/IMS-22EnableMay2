@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Orders {
 	private Long orderId;
 	private Customer customer;
+	private Long cost;
 	
 	public Customer getCustomerID() {
 		return customer;
@@ -14,12 +15,22 @@ public class Orders {
 		this.orderId = orderId;
 		this.customer = customer;
 	}
+	
+	public Orders(Long orderId, Customer customer, Long cost) {
+		this.orderId = orderId;
+		this.customer = customer;
+		this.cost = cost;
+	}
 	public Orders(Customer customer) {
 		this.customer = customer;
 	}
 
-
-
+	public Long getCost() {
+		return cost;
+	}
+	public void setCost(Long cost) {
+		this.cost = cost;
+	}
 
 	public Orders() {
 		// TODO Auto-generated constructor stub
@@ -47,21 +58,15 @@ public class Orders {
 		this.customer = customer;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "id=" + orderId + ", customer=" + customer + "]";
+		return "Orders [orderId=" + orderId + ", customer=" + customer + ", cost=" + cost + "]";
 	}
-
-
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(customer, orderId);
+		return Objects.hash(cost, customer, orderId);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -72,8 +77,12 @@ public class Orders {
 		if (getClass() != obj.getClass())
 			return false;
 		Orders other = (Orders) obj;
-		return Objects.equals(customer, other.customer) && Objects.equals(orderId, other.orderId);
+		return Objects.equals(cost, other.cost) && Objects.equals(customer, other.customer)
+				&& Objects.equals(orderId, other.orderId);
 	}
+
+
+
 	
 	
 	

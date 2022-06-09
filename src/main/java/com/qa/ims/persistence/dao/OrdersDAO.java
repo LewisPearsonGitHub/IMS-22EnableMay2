@@ -20,8 +20,6 @@ public class OrdersDAO implements Dao<Orders>{
 	
 	
 	
-	
-	
 	@Override
 	public Orders modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long ordersId = resultSet.getLong("orders_id");
@@ -54,7 +52,7 @@ public class OrdersDAO implements Dao<Orders>{
 	public Orders readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY orders_id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT orders_id, fk_customers_id, sum(quantity*`value`) AS 'cost', first_name, surname FROM orders o JOIN customers c ON c.customers_id = o.fk_customers_id JOIN orders_items oi ON oi.fk_orders_id = o.orders_id JOIN items i ON oi.fk_items_id=i.items_id GROUP BY orders_id ORDER BY orders_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {

@@ -12,29 +12,27 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.qa.ims.controller.ItemsController;
-import com.qa.ims.persistence.dao.ItemsDAO;
-import com.qa.ims.persistence.domain.Items;
+import com.qa.ims.controller.OrdersController;
+import com.qa.ims.persistence.dao.OrdersDAO;
+import com.qa.ims.persistence.domain.Orders;
 import com.qa.ims.utils.Utils;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ItemsControllerTest {
-
-	@Mock
+public class OrdersControllerTest {@Mock
 	private Utils utils;
 
 	@Mock
-	private ItemsDAO dao;
+	private OrdersDAO dao;
 
 	@InjectMocks
-	private ItemsController controller;
+	private OrdersController controller;
 
 	@Test
 	public void testCreate() {
 		
-		final double value= 1.20;
-		final String itemName= "bike";
-		final Items created = new Items(value, itemName);
+		final Long ordersId= 1L;
+		final Long customerId= 1L;
+		final O created = new Items(value, itemName);
 		
 		Mockito.when(utils.getDouble()).thenReturn(value);
 		Mockito.when(utils.getString()).thenReturn(itemName);
@@ -49,7 +47,7 @@ public class ItemsControllerTest {
 
 	@Test
 	public void testReadAll() {
-		List<Items> items = new ArrayList<>();
+		List<Order> items = new ArrayList<>();
 		items.add(new Items(1L, 1.20, "car"));
 
 		Mockito.when(dao.readAll()).thenReturn(items);

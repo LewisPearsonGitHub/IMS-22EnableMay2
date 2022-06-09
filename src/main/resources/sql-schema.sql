@@ -4,7 +4,10 @@ CREATE SCHEMA IF NOT EXISTS `ims`;
 
 USE `ims` ;
 
-
+DROP TABLE IF EXISTS `orders_items`;
+DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `customers`;
+DROP TABLE IF EXISTS `items`;
 
 
 CREATE TABLE IF NOT EXISTS `ims`.`customers` (

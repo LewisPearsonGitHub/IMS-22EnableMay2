@@ -46,7 +46,7 @@ public class OrdersController implements CrudController<Orders>{
 		CustomerDAO customerDAO = new CustomerDAO();
 		Customer customer = customerDAO.read(customerId);
 		Orders orders = ordersDAO.create(new Orders(customer));
-		LOGGER.info("Item created");
+		LOGGER.info("Order created");
 		return orders;
 	}
 
@@ -76,4 +76,5 @@ public class OrdersController implements CrudController<Orders>{
 		Long ordersId = utils.getLong();
 		return ordersDAO.delete(ordersId);
 	}
+	
 }

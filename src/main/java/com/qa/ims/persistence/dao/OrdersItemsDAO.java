@@ -47,7 +47,7 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 	public List<OrdersItems> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders_items oi JOIN orders o ON oi.fk_orders_id = o.orders_id JOIN items i ON oi.fk_items_id = i.items_id JOIN customers c ON o.fk_customers_id = c.customers_id");){
+				ResultSet resultSet = statement.executeQuery("SELECT oi.orders_items_id, oi.fk_orders_id, fk_items_id, oi.quantity, i.`value`, i.item_name, c.customers_id, c.first_name, c.surname FROM orders_items oi LEFT JOIN orders o ON oi.fk_orders_id = o.orders_id LEFT JOIN items i ON oi.fk_items_id = i.items_id LEFT JOIN customers c ON o.fk_customers_id = c.customers_id");){
 			List<OrdersItems> ordersItems = new ArrayList<>();
 			while (resultSet.next()) {
 				ordersItems.add(modelFromResultSet(resultSet));

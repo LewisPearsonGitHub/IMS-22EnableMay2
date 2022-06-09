@@ -36,7 +36,7 @@ public class OrdersDAO implements Dao<Orders>{
 	public List<Orders> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT orders_id, fk_customers_id, sum(quantity*`value`) AS 'cost', first_name, surname FROM orders o JOIN customers c ON c.customers_id = o.fk_customers_id JOIN orders_items oi ON oi.fk_orders_id = o.orders_id JOIN items i ON oi.fk_items_id=i.items_id GROUP BY orders_id");) {
+				ResultSet resultSet = statement.executeQuery("SELECT o.orders_id,oi.fk_items_id, fk_customers_id, sum(oi.quantity*i.`value`) AS cost, c.first_name, c.surname FROM orders o LEFT JOIN customers c ON c.customers_id = o.fk_customers_id LEFT JOIN orders_items oi ON oi.fk_orders_id = o.orders_id LEFT JOIN items i ON oi.fk_items_id=i.items_id GROUP BY o.orders_id");) {
 			List<Orders> orders = new ArrayList<>();
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));
@@ -52,7 +52,7 @@ public class OrdersDAO implements Dao<Orders>{
 	public Orders readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT orders_id, fk_customers_id, sum(quantity*`value`) AS 'cost', first_name, surname FROM orders o JOIN customers c ON c.customers_id = o.fk_customers_id JOIN orders_items oi ON oi.fk_orders_id = o.orders_id JOIN items i ON oi.fk_items_id=i.items_id GROUP BY orders_id ORDER BY orders_id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT o.orders_id, fk_customers_id, sum(quantity*`value`) AS cost, c.first_name, c.surname FROM orders o JOIN customers c ON c.customers_id = o.fk_customers_id JOIN orders_items oi ON oi.fk_orders_id = o.orders_id JOIN items i ON oi.fk_items_id=i.items_id GROUP BY o.orders_id ORDER BY o.orders_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -80,7 +80,7 @@ public class OrdersDAO implements Dao<Orders>{
 	@Override
 	public Orders read(Long ordersId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE orders_id = ?");) {
+				PreparedStatement statement = connection.prepareStatement("SELECT o.orders_id, fk_customers_id, sum(quantity*`value`) AS cost, c.first_name, c.surname FROM orders o JOIN customers c ON c.customers_id = o.fk_customers_id JOIN orders_items oi ON oi.fk_orders_id = o.orders_id JOIN items i ON oi.fk_items_id=i.items_id  WHERE orders_id = ? GROUP BY o.orders_id ORDER BY o.orders_id");) {
 			statement.setLong(1, ordersId);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();

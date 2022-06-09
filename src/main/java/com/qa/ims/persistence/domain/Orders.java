@@ -60,7 +60,7 @@ public class Orders {
 
 	@Override
 	public String toString() {
-		return "Orders [orderId=" + orderId + ", customer=" + customer + ", cost=" + cost + "]";
+		return "Orders [orderId=" + orderId + ", customer=" + customer + ", cost= £" + cost + "]";
 	}
 
 	@Override

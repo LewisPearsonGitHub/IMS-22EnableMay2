@@ -54,11 +54,11 @@ public class ItemsDAOTest {
 
 	@Test
 	public void testDelete() {
-		assertEquals(1, DAO.delete(1));
+		assertEquals(0, DAO.delete(0));
 	}
 	@Test
 	public void testReadException() {
-	DAO.delete(1L);
-	assertNull(DAO.read(1L));
+	DAO.delete(0L);
+	assertNull(DAO.read(0L));
 	}
 }

@@ -20,7 +20,7 @@ public class OrdersItemsDAOTest {
 	Customer customer = new Customer(1L, "jordan", "harrison");
 	
 	Items items = new Items(1L, 1L, "cat");
-	Orders orders = new Orders(1L, customer, 1L);
+	Orders orders = new Orders(1L, customer);
 	
 	@Before
 	public void setup() {
@@ -50,7 +50,7 @@ public class OrdersItemsDAOTest {
 	@Test
 	public void testRead() {
 		final long ordersItemsId = 1L;
-		assertEquals(new OrdersItems(ordersItemsId,items, orders, 1L), DAO.read(ordersItemsId));
+		assertEquals(new OrdersItems(items, orders, 1L), DAO.read(ordersItemsId));
 	}
 
 	@Test
@@ -65,10 +65,38 @@ public class OrdersItemsDAOTest {
 		assertEquals(1, DAO.delete(1));
 	}
 	
-	@Test
-	public void testReadException() {
-		DAO.delete(1L);
-		assertNull(DAO.read(1L));
-	}
+//	@Test
+//	public void testReadException() {
+//		DAO.delete(1L);
+//		assertNull(DAO.read(1L));
+//	}
+//
+//	@Test
+//	public void testReadAllException() {
+//		
+//		DAO.delete(2L); DAO.delete(1L);
+//		assertNull(DAO.readAll());
+//	}
+//	@Test
+//	public void testReadLatestException() {
+//		DAO.delete(2L);
+//		DAO.delete(1L);
+//		assertNull(DAO.readLatest());
+//	}
+	
+//	@Test
+//	public void testCreateException() {
+//		final Customer customer = new Customer(1L, "jordan","surname");
+//		assertNull(DAO.create(customer));
+//	}
+//	@Test
+//	public void testDeleteException() {
+//		System.out.println(DAO.readAll());
+//		DAO.delete(1L);
+//		System.out.println(DAO.readAll());
+//		DAO.delete(1L);
+//		System.out.println(DAO.readAll());
+//		assertEquals(0,DAO.delete(1L));
+//	}
 }
 

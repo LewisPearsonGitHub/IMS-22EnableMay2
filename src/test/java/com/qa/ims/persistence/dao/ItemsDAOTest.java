@@ -30,7 +30,7 @@ public class ItemsDAOTest {
 	@Test
 	public void testReadAll() {
 		List<Items> expected = new ArrayList<>();
-		expected.add(new Items(1L, 1.20, "car"));
+		expected.add(new Items(1L, 1, "car"));
 		assertEquals(expected, DAO.readAll());
 	}
 
@@ -61,4 +61,38 @@ public class ItemsDAOTest {
 	DAO.delete(0L);
 	assertNull(DAO.read(0L));
 	}
+	
+//	@Test
+//	public void testReadAllException() {
+//		
+//		DAO.delete(2L); DAO.delete(1L);
+//		assertNull(DAO.readAll());
+//	}
+	@Test
+	public void testReadLatestException() {
+		DAO.delete(2L);
+		DAO.delete(1L);
+		assertNull(DAO.readLatest());
+	}
+	
+	@Test
+	public void testCreateException() {
+		final Items item= new Items(1L, 1.003,"1234567891123456789112345678911234567891123123");
+		assertNull(DAO.create(item));
+	}
+	@Test
+	public void testUpdateException() {
+		final Items item = new Items(1L, 1.003, "1234567891123456789112345678911234567891123123");
+		assertNull(DAO.update(item));
+	}
+//	@Test
+//	public void testDeleteException() {
+//		System.out.println(DAO.readAll());
+//		DAO.delete(0L);
+//		System.out.println(DAO.readAll());
+//		DAO.delete(0L);
+//		System.out.println(DAO.readAll());
+//		assertEquals(0,DAO.delete(0L));
+//	}
+
 }

@@ -65,6 +65,7 @@ public class OrdersItems {
 		return Objects.equals(items, other.items) && Objects.equals(orderItemsId, other.orderItemsId)
 				&& Objects.equals(orders, other.orders) && Objects.equals(quantity, other.quantity);
 	}
+
 	
 	
 	

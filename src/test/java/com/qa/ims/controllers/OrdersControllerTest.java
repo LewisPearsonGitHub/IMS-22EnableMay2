@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.qa.ims.controller.OrdersController;
+import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.dao.OrdersDAO;
 import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Orders;
@@ -62,11 +63,8 @@ public class OrdersControllerTest {
 	public void testUpdate() {
 		final Customer customer = new Customer(1L, "jordan", "harrison");
 		final Orders updated = new Orders(1L, customer);
-		//final long customerId = 1L;
 		
-		
-		Mockito.when(this.utils.getLong()).thenReturn(1L);
-		Mockito.when(this.utils.getLong()).thenReturn(updated.getCustomer().getId());
+		Mockito.when(this.utils.getLong()).thenReturn(1L, 1L);
 		Mockito.when(this.dao.update(updated)).thenReturn(updated);
 
 		assertEquals(updated, this.controller.update());

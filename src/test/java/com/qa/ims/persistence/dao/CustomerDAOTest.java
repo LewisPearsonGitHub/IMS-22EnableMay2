@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.qa.ims.persistence.domain.Customer;
+import com.qa.ims.persistence.domain.Items;
 import com.qa.ims.utils.DBUtils;
 
 public class CustomerDAOTest {
@@ -65,6 +66,7 @@ public class CustomerDAOTest {
 	
 //	@Test
 //	public void testReadAllException() {
+//		
 //		DAO.delete(2L); DAO.delete(1L);
 //		assertNull(DAO.readAll());
 //	}
@@ -75,18 +77,25 @@ public class CustomerDAOTest {
 		assertNull(DAO.readLatest());
 	}
 	
-//	@Test
-//	public void testCreateException() {
-//		final Customer customer = new Customer(1L, "jordan","surname");
-//		assertNull(DAO.create(customer));
-//	}
 	@Test
-	public void testDeleteException() {
-		System.out.println(DAO.readAll());
-		DAO.delete(1L);
-		System.out.println(DAO.readAll());
-		DAO.delete(1L);
-		System.out.println(DAO.readAll());
-		assertEquals(0,DAO.delete(1L));
+	public void testCreateException() {
+		Customer customer= new Customer(1L, "1234567891123456789112345678911234567891123123"," ");
+		assertNull(DAO.create(customer));
+		
+		
 	}
+	@Test
+	public void testUpdateException() {
+		final Customer updated = new Customer(1L, "1234567891123456789112345678911234567891123123", "perrins");
+		assertNull(DAO.update(updated));
+	}
+//	@Test
+//	public void testDeleteException() {
+//		System.out.println(DAO.readAll());
+//		DAO.delete(1L);
+//		System.out.println(DAO.readAll());
+//		DAO.delete(1L);
+//		System.out.println(DAO.readAll());
+//		assertEquals(0,DAO.delete(1L));
+//	}
 }

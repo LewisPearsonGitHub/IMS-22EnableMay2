@@ -64,11 +64,11 @@ public class CustomerDAOTest {
 	assertNull(DAO.read(0L));
 	}
 	
-	@Test
-	public void testReadAllException() {
-		DAO.delete(1L);
-		assertNull(DAO.readAll());
-	}
+//	@Test
+//	public void testReadAllException() {
+//		DAO.delete(1L);
+//		assertNull(DAO.readAll());
+//	}
 	@Test
 	public void testReadLatestException() {
 		DAO.delete(2L);

@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.qa.ims.controller.OrdersController;
 import com.qa.ims.persistence.dao.CustomerDAO;
+import com.qa.ims.persistence.dao.Dao;
 import com.qa.ims.persistence.dao.OrdersDAO;
 import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Orders;
@@ -61,17 +62,19 @@ public class OrdersControllerTest {
 
 	@Test
 	public void testUpdate() {
-		final Customer customer = new Customer(1L, "jordan", "harrison");
-		final Orders updated = new Orders(1L, customer);
 		
-		Mockito.when(this.utils.getLong()).thenReturn(1L, 1L);
-		Mockito.when(this.dao.update(updated)).thenReturn(updated);
+		Customer customer = new Customer(1L, "jordan", "harrison");
+		final Orders updated = new Orders(customer);
+		
+		Mockito.when(utils.getLong()).thenReturn(1L);
+		Mockito.when(utils.getLong()).thenReturn(updated.getCustomer().getId());
+		Mockito.when(dao.update(updated)).thenReturn(updated);
 
-		assertEquals(updated, this.controller.update());
+		assertEquals(updated, controller.update());
 
-		Mockito.verify(this.utils, Mockito.times(2)).getLong();
+		Mockito.verify(utils, Mockito.times(2)).getLong();
 		//Mockito.verify(this.utils, Mockito.times(2)).getString();
-		Mockito.verify(this.dao, Mockito.times(1)).update(updated);
+		Mockito.verify(dao, Mockito.times(1)).update(updated);
 	}
 
 	@Test

@@ -19,7 +19,7 @@ public class OrdersItemsDAOTest {
 	private final OrdersItemsDAO DAO = new OrdersItemsDAO();
 	Customer customer = new Customer(1L, "jordan", "harrison");
 	
-	Items items = new Items(1L, 1L, "cat");
+	Items items = new Items(1L, 1.2, "car");
 	Orders orders = new Orders(1L, customer);
 	
 	@Before
@@ -30,27 +30,38 @@ public class OrdersItemsDAOTest {
 	
 	@Test
 	public void testCreate() {
+		System.out.println("TEST 1  ---- " + DAO.readAll());
+		 final ItemsDAO itemDAO = new ItemsDAO();
+		 final CustomerDAO cuDAO = new CustomerDAO();
+		 final OrdersDAO orDAO = new OrdersDAO();
+		Customer customer = new Customer(1L, "jordan", "harrison");
 		
-		final OrdersItems created = new OrdersItems(items, orders, 1L);
+		Items items = new Items(1L, 1L, "cat");
+		Orders orders = new Orders(1L, customer);
+	itemDAO.create(items); cuDAO.create(customer); orDAO.create(orders);
+		final OrdersItems created = new OrdersItems(2L, new Items(1L, "car"), new Orders(1L, new Customer(1L, "jordan", "harrison")), 1L);
 		assertEquals(created, DAO.create(created));
+		System.out.println("TEST 2 ----- " + DAO.readAll());
 	}
 
 	@Test
 	public void testReadAll() {
 		List<OrdersItems> expected = new ArrayList<>();
-		expected.add(new OrdersItems(items, orders, 1L));
+		expected.add(new OrdersItems(1L,items, orders, 5L));
 		assertEquals(expected, DAO.readAll());
 	}
 
 	@Test
 	public void testReadLatest() {
-		assertEquals(new OrdersItems(items, orders, 1L), DAO.readLatest());
+		System.out.println(DAO.readLatest());
+		assertEquals(new OrdersItems(1L, items, orders, 5L), DAO.readLatest());
+		
 	}
 
 	@Test
 	public void testRead() {
 		final long ordersItemsId = 1L;
-		assertEquals(new OrdersItems(items, orders, 1L), DAO.read(ordersItemsId));
+		assertEquals(new OrdersItems(1L, items, orders, 1L), DAO.read(ordersItemsId));
 	}
 
 	@Test
@@ -84,11 +95,11 @@ public class OrdersItemsDAOTest {
 //		assertNull(DAO.readLatest());
 //	}
 	
-//	@Test
-//	public void testCreateException() {
-//		final Customer customer = new Customer(1L, "jordan","surname");
-//		assertNull(DAO.create(customer));
-//	}
+	@Test
+	public void testCreateException() {
+		
+		assertNull(DAO.create(new OrdersItems(1L, new Items(1L,1L, "lewispearsonlewispearsonlewisplewispearsonlewispearsonlewispearsonearsonlewispearsonlewispearsonlewispearson"),orders,1L)));
+	}
 //	@Test
 //	public void testDeleteException() {
 //		System.out.println(DAO.readAll());

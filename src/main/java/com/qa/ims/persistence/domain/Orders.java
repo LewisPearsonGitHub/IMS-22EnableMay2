@@ -25,13 +25,13 @@ public class Orders {
 		this.customer = customer;
 	}
 
-//	public Long getCost() {
-//		return cost;
-//	}
-//	public void setCost(Long cost) {
-//		this.cost = cost;
-//	}
-//
+	public Long getCost() {
+		return cost;
+	}
+	public void setCost(Long cost) {
+		this.cost = cost;
+	}
+
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
@@ -42,9 +42,9 @@ public class Orders {
 
 
 
-//	public void setOrderId(Long orderId) {
-//		this.orderId = orderId;
-//	}
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
 
 
 
@@ -54,9 +54,9 @@ public class Orders {
 
 
 
-//	public void setCustomer(Customer customer) {
-//		this.customer = customer;
-//	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 	@Override
 	public String toString() {

@@ -27,7 +27,7 @@ public class ItemsDAO implements Dao<Items>{
 	}
 
 	
-	// Reads all customers from the database
+	// Reads all items from the database
 	
 	@Override
 	public List<Items> readAll() {
@@ -58,6 +58,8 @@ public class ItemsDAO implements Dao<Items>{
 		}
 		return null;
 	}
+	
+	// Creates an item in the database
 	
 	@Override
 	public Items create(Items item) {
@@ -91,7 +93,7 @@ public class ItemsDAO implements Dao<Items>{
 		return null;
 	}
 
-	
+	// Updates an item in the database
 
 	@Override
 	public Items update(Items item) {
@@ -110,6 +112,8 @@ public class ItemsDAO implements Dao<Items>{
 		return null;
 	}
 
+	
+	// Deletes an item in the database
 	@Override
 	public int delete(long itemsId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();

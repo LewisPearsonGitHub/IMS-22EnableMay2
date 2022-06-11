@@ -43,6 +43,8 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 		return new OrdersItems(orderItemsId, items, orders, quantity);
 	}
 	
+	// Reads all ordersItems records
+	
 	@Override
 	public List<OrdersItems> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -72,6 +74,8 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 		}
 		return null;
 	}
+	
+	// Creates an ordersitems record in the database
 	
 	@Override
 	public OrdersItems create(OrdersItems ordersItems) {
@@ -106,25 +110,27 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 		return null;
 	}
 
-	
+	//updates an ordersitems record in the database - not currently used
 
 	@Override
 	public OrdersItems update(OrdersItems ordersItems) {
-		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection
-						.prepareStatement("UPDATE orders_items SET fk_items_id= ?, fk_orders_id=?,quantity=? WHERE orders_items_id = ?");) {
-			statement.setLong(1, ordersItems.getItems().getItemsId());
-			statement.setLong(1, ordersItems.getOrders().getOrderId());
-			statement.setLong(1, ordersItems.getQuantity());
-			statement.executeUpdate();
-			return read(ordersItems.getOrderItemsId());
-		} catch (Exception e) {
-			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
-		}
+//		try (Connection connection = DBUtils.getInstance().getConnection();
+//				PreparedStatement statement = connection
+//						.prepareStatement("UPDATE orders_items SET fk_items_id= ?, fk_orders_id=?,quantity=? WHERE orders_items_id = ?");) {
+//			statement.setLong(1, ordersItems.getItems().getItemsId());
+//			statement.setLong(1, ordersItems.getOrders().getOrderId());
+//			statement.setLong(1, ordersItems.getQuantity());
+//			statement.executeUpdate();
+//			return read(ordersItems.getOrderItemsId());
+//		} catch (Exception e) {
+//			LOGGER.debug(e);
+//			LOGGER.error(e.getMessage());
+//		}
 		return null;
 	}
 
+	//Deletes an ordersitems record in the database
+	
 	@Override
 	public int delete(long ordersItemsId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();

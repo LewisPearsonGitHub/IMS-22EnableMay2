@@ -32,6 +32,8 @@ public class OrdersDAO implements Dao<Orders>{
 		return new Orders(ordersId, customer, cost);
 	}
 
+	//Reads all orders
+	
 	@Override
 	public List<Orders> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -61,6 +63,8 @@ public class OrdersDAO implements Dao<Orders>{
 		}
 		return null;
 	}
+	
+	// Creates an order in the database
 	
 	@Override
 	public Orders create(Orders order) {
@@ -94,7 +98,8 @@ public class OrdersDAO implements Dao<Orders>{
 	}
 
 	
-
+// Updates an order in the database
+	
 	@Override
 	public Orders update(Orders order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -111,6 +116,8 @@ public class OrdersDAO implements Dao<Orders>{
 		return null;
 	}
 
+	//Deletes an order in the database
+	
 	@Override
 	public int delete(long ordersId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();

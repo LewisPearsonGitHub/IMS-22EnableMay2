@@ -13,8 +13,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.qa.ims.controller.OrdersController;
-import com.qa.ims.persistence.dao.CustomerDAO;
-import com.qa.ims.persistence.dao.Dao;
 import com.qa.ims.persistence.dao.OrdersDAO;
 import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Orders;

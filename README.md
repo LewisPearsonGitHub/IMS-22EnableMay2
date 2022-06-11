@@ -1,4 +1,4 @@
-Coverage: 77.6%
+Coverage: 72.8%
 # Project Title
 
 This is the week 5 QA Academy Project to design an application that handles an Inventory Management System.

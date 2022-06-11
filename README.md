@@ -64,7 +64,7 @@ A third diagram was created after it was realised that another row in one of the
 
 Testing is done through using JUnit and Mockito. The tests can be run within Eclipse, by right clicking on the src/test/java folder in the Project Explorer (usually on the left hand side, but if not can be opened through Window->Show View-> Project Explorer) and click Run As -> JUnit test. Alternatively, instead of Run As click Coverage As -> JUnit test to highlight what has been covered by tests.
 
-Ideally, test coverage would be above 80%, however in this case a coverage of only 72.8% was achieved. This is sufficient for the purpose of this project, and with more time, or more training on testing coverage of >80% would be easily achieved.
+Ideally, test coverage would be above 80%, however in this case a coverage of only 72.8% was achieved. This is sufficient for the purpose of this project, and with more time, or more training on testing, coverage of >80% would be easily achieved.
 
 Current tests cover most of the CRUD functionality for the various tables through testing the domain, DAO and controller files, and also testing most of the exceptions.
 

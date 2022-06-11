@@ -67,12 +67,12 @@ public class OrdersDAOTest {
 	assertNull(DAO.read(0L));
 	}
 	
-//	@Test
-//	public void testReadAllException() {
-//		
-//		DAO.delete(2L); DAO.delete(1L);
-//		assertNull(DAO.readAll());
-//	}
+	@Test
+	public void testReadAllException() {
+		
+		DAO.delete(2L); DAO.delete(1L);
+		assertNull(DAO.readAll());
+	}
 	@Test
 	public void testReadLatestException() {
 		DAO.delete(2L);
@@ -90,16 +90,14 @@ public class OrdersDAOTest {
 	public void testUpdateException() {
 		DAO.delete(1L);
 		final Customer customer = new Customer(-1111111111111111111L, "4567891123123", "perrins");
-		final Orders order= new Orders();
+		final Orders order= new Orders(1L, customer);
 		assertNull(DAO.update(order));
 	}
-//	@Test
-//	public void testDeleteException() {
-//		System.out.println(DAO.readAll());
-//		DAO.delete(1L);
-//		System.out.println(DAO.readAll());
-//		assertEquals(0, DAO.delete(1L));
-//		System.out.println(DAO.readAll());
-//	}
+	@Test
+	public void testDeleteException() {
+		
+		DAO.delete(1L);
+		assertNull(DAO.readAll());
+	}
 
 }

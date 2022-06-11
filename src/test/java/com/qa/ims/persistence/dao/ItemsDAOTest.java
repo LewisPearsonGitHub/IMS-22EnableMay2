@@ -3,6 +3,10 @@ package com.qa.ims.persistence.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +18,7 @@ import com.qa.ims.utils.DBUtils;
 
 public class ItemsDAOTest {
 	private final ItemsDAO DAO = new ItemsDAO();
-
+	
 	@Before
 	public void setup() {
 		DBUtils.connect();
@@ -62,12 +66,12 @@ public class ItemsDAOTest {
 	assertNull(DAO.read(0L));
 	}
 	
-//	@Test
-//	public void testReadAllException() {
-//		
-//		DAO.delete(2L); DAO.delete(1L);
-//		assertNull(DAO.readAll());
-//	}
+	@Test
+	public void testReadAllException() {
+			DAO.delete(2L); DAO.delete(1L);
+		
+		assertNull(DAO.readAll());
+	}
 	@Test
 	public void testReadLatestException() {
 		DAO.delete(2L);

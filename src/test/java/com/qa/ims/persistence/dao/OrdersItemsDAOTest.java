@@ -30,7 +30,7 @@ public class OrdersItemsDAOTest {
 	
 	@Test
 	public void testCreate() {
-		System.out.println("TEST 1  ---- " + DAO.readAll());
+		
 		 final ItemsDAO itemDAO = new ItemsDAO();
 		 final CustomerDAO cuDAO = new CustomerDAO();
 		 final OrdersDAO orDAO = new OrdersDAO();
@@ -41,7 +41,7 @@ public class OrdersItemsDAOTest {
 	itemDAO.create(items); cuDAO.create(customer); orDAO.create(orders);
 		final OrdersItems created = new OrdersItems(2L, new Items(1L, "car"), new Orders(1L, new Customer(1L, "jordan", "harrison")), 1L);
 		assertEquals(created, DAO.create(created));
-		System.out.println("TEST 2 ----- " + DAO.readAll());
+		
 	}
 
 	@Test
@@ -76,38 +76,37 @@ public class OrdersItemsDAOTest {
 		assertEquals(1, DAO.delete(1));
 	}
 	
-//	@Test
-//	public void testReadException() {
-//		DAO.delete(1L);
-//		assertNull(DAO.read(1L));
-//	}
-//
-//	@Test
-//	public void testReadAllException() {
-//		
-//		DAO.delete(2L); DAO.delete(1L);
-//		assertNull(DAO.readAll());
-//	}
-//	@Test
-//	public void testReadLatestException() {
-//		DAO.delete(2L);
-//		DAO.delete(1L);
-//		assertNull(DAO.readLatest());
-//	}
+	@Test
+	public void testReadException() {
+		DAO.delete(1L);
+		assertNull(DAO.read(1L));
+	}
+
+	@Test
+	public void testReadAllException() {
+		
+		DAO.delete(2L); DAO.delete(1L);
+		assertNull(DAO.readAll());
+	}
+	@Test
+	public void testReadLatestException() {
+		DAO.delete(2L);
+		DAO.delete(1L);
+		assertNull(DAO.readLatest());
+	}
 	
 	@Test
 	public void testCreateException() {
 		
 		assertNull(DAO.create(new OrdersItems(1L, new Items(1L,1L, "lewispearsonlewispearsonlewisplewispearsonlewispearsonlewispearsonearsonlewispearsonlewispearsonlewispearson"),orders,1L)));
 	}
-//	@Test
-//	public void testDeleteException() {
-//		System.out.println(DAO.readAll());
-//		DAO.delete(1L);
-//		System.out.println(DAO.readAll());
-//		DAO.delete(1L);
-//		System.out.println(DAO.readAll());
-//		assertEquals(0,DAO.delete(1L));
-//	}
+	@Test
+	public void testDeleteException() {
+		
+		
+		DAO.delete(1L);
+		
+		assertEquals(0,DAO.delete(1L));
+	}
 }
 

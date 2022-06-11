@@ -9,13 +9,12 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.qa.ims.persistence.domain.Customer;
+import com.qa.ims.persistence.domain.Items;
 import com.qa.ims.utils.DBUtils;
 
-public class CustomerDAOTest {
-
-	private final CustomerDAO DAO = new CustomerDAO();
-
+public class ItemsDAOTest {
+	private final ItemsDAO DAO = new ItemsDAO();
+	
 	@Before
 	public void setup() {
 		DBUtils.connect();
@@ -24,38 +23,38 @@ public class CustomerDAOTest {
 
 	@Test
 	public void testCreate() {
-		final Customer created = new Customer(2L, "chris", "perrins");
+		final Items created = new Items(2L, 5, "dog");
 		assertEquals(created, DAO.create(created));
 	}
 
 	@Test
 	public void testReadAll() {
-		List<Customer> expected = new ArrayList<>();
-		expected.add(new Customer(1L, "jordan", "harrison"));
+		List<Items> expected = new ArrayList<>();
+		expected.add(new Items(1L, 1.2, "car"));
 		assertEquals(expected, DAO.readAll());
 	}
 
 	@Test
 	public void testReadLatest() {
-		assertEquals(new Customer(1L, "jordan", "harrison"), DAO.readLatest());
+		assertEquals(new Items(1L, 1.20, "car"), DAO.readLatest());
 	}
 
 	@Test
 	public void testRead() {
-		final long Customers_Id = 1L;
-		assertEquals(new Customer(Customers_Id, "jordan", "harrison"), DAO.read(Customers_Id));
+		final long itemsId = 1L;
+		assertEquals(new Items(itemsId, 1.20, "car"), DAO.read(itemsId));
 	}
 
 	@Test
 	public void testUpdate() {
-		final Customer updated = new Customer(1L, "chris", "perrins");
+		final Items updated = new Items(1L, 5, "cat");
 		assertEquals(updated, DAO.update(updated));
 
 	}
 
 	@Test
 	public void testDelete() {
-		assertEquals(1L, DAO.delete(1L));
+		assertEquals(0, DAO.delete(0));
 	}
 	@Test
 	public void testReadException() {
@@ -65,7 +64,8 @@ public class CustomerDAOTest {
 	
 //	@Test
 //	public void testReadAllException() {
-//		DAO.delete(1L);
+//			DAO.delete(2L); DAO.delete(1L);
+//		
 //		assertNull(DAO.readAll());
 //	}
 	@Test
@@ -77,23 +77,21 @@ public class CustomerDAOTest {
 	
 	@Test
 	public void testCreateException() {
-		Customer customer= new Customer(1L, "1234567891123456789112345678911234567891123123"," ");
-		assertNull(DAO.create(customer));
-		
-		
+		final Items item= new Items(1L, 1.003,"1234567891123456789112345678911234567891123123");
+		assertNull(DAO.create(item));
 	}
 	@Test
 	public void testUpdateException() {
-		final Customer updated = new Customer(1L, "1234567891123456789112345678911234567891123123", "perrins");
-		assertNull(DAO.update(updated));
+		final Items item = new Items(1L, 1.003, "1234567891123456789112345678911234567891123123");
+		assertNull(DAO.update(item));
 	}
 //	@Test
 //	public void testDeleteException() {
 //		System.out.println(DAO.readAll());
 //		DAO.delete(1L);
 //		System.out.println(DAO.readAll());
-//		DAO.delete(1L);
-//		System.out.println(DAO.readAll());
-//		assertEquals(0,DAO.delete(1L));
+//		assertNull(DAO.delete(1L));
+//		
 //	}
+
 }

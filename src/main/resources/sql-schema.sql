@@ -4,7 +4,10 @@ CREATE SCHEMA IF NOT EXISTS `ims`;
 
 USE `ims` ;
 
-
+DROP TABLE IF EXISTS `orders_items`;
+DROP TABLE IF EXISTS `orders`;
+DROP TABLE IF EXISTS `customers`;
+DROP TABLE IF EXISTS `items`;
 
 
 CREATE TABLE IF NOT EXISTS `ims`.`customers` (
@@ -25,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `ims`.`orders` (
     `orders_id` INT(11) NOT NULL AUTO_INCREMENT,
     `fk_customers_id` INT(11) DEFAULT NULL,
     PRIMARY KEY (`orders_id`),
-    FOREIGN KEY (`fk_customers_id`) REFERENCES `customers`(`customers_id`)
+    FOREIGN KEY (`fk_customers_id`) REFERENCES `customers`(`customers_id`) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS `ims`.`orders_items` (
@@ -34,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `ims`.`orders_items` (
 `fk_orders_id` INT(11) DEFAULT NULL,
 `quantity` INT(11) DEFAULT NULL,
 PRIMARY KEY (`orders_items_id`),
-FOREIGN KEY(`fk_items_id`) REFERENCES `items`(`items_id`),
-FOREIGN KEY(`fk_orders_id`) REFERENCES `orders`(`orders_id`)
+FOREIGN KEY(`fk_items_id`) REFERENCES `items`(`items_id`) ON DELETE CASCADE,
+FOREIGN KEY(`fk_orders_id`) REFERENCES `orders`(`orders_id`) ON DELETE CASCADE
 );
 

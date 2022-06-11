@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.dao.ItemsDAO;
-import com.qa.ims.persistence.dao.OrdersDAO;
 import com.qa.ims.persistence.dao.OrdersItemsDAO;
 import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Items;
@@ -30,7 +29,7 @@ public class OrdersItemsController implements CrudController<OrdersItems> {
 	}
 
 	/**
-	 * Reads all Orders to the logger
+	 * Reads all OrdersItems records to the logger
 	 */
 	@Override
 	public List<OrdersItems> readAll() {
@@ -42,7 +41,7 @@ public class OrdersItemsController implements CrudController<OrdersItems> {
 	}
 
 	/**
-	 * Creates a Orders by taking in user input
+	 * Creates an OrdersItems by taking in user input
 	 */
 	@Override
 	public OrdersItems create() {
@@ -71,7 +70,7 @@ public class OrdersItemsController implements CrudController<OrdersItems> {
 	}
 
 	/**
-	 * Updates an existing Orders by taking in user input
+	 * Update not possible as not in project scope
 	 */
 	@Override
 	public OrdersItems update() {

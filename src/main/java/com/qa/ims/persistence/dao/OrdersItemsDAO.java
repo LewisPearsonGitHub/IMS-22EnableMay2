@@ -43,11 +43,13 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 		return new OrdersItems(orderItemsId, items, orders, quantity);
 	}
 	
+	// Reads all ordersItems records
+	
 	@Override
 	public List<OrdersItems> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders_items oi JOIN orders o ON oi.fk_orders_id = o.orders_id JOIN items i ON oi.fk_items_id = i.items_id JOIN customers c ON o.fk_customers_id = c.customers_id");){
+				ResultSet resultSet = statement.executeQuery("SELECT oi.orders_items_id, oi.fk_orders_id, fk_items_id, oi.quantity, i.`value`, i.item_name, c.customers_id, c.first_name, c.surname FROM orders_items oi LEFT JOIN orders o ON oi.fk_orders_id = o.orders_id LEFT JOIN items i ON oi.fk_items_id = i.items_id LEFT JOIN customers c ON o.fk_customers_id = c.customers_id");){
 			List<OrdersItems> ordersItems = new ArrayList<>();
 			while (resultSet.next()) {
 				ordersItems.add(modelFromResultSet(resultSet));
@@ -72,6 +74,8 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 		}
 		return null;
 	}
+	
+	// Creates an ordersitems record in the database
 	
 	@Override
 	public OrdersItems create(OrdersItems ordersItems) {
@@ -106,25 +110,27 @@ public class OrdersItemsDAO implements Dao<OrdersItems> {
 		return null;
 	}
 
-	
+	//updates an ordersitems record in the database - not currently used
 
 	@Override
 	public OrdersItems update(OrdersItems ordersItems) {
-		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection
-						.prepareStatement("UPDATE orders_items SET fk_items_id= ?, fk_orders_id=?,quantity=? WHERE orders_items_id = ?");) {
-			statement.setLong(1, ordersItems.getItems().getItemsId());
-			statement.setLong(1, ordersItems.getOrders().getOrderId());
-			statement.setLong(1, ordersItems.getQuantity());
-			statement.executeUpdate();
-			return read(ordersItems.getOrderItemsId());
-		} catch (Exception e) {
-			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
-		}
+//		try (Connection connection = DBUtils.getInstance().getConnection();
+//				PreparedStatement statement = connection
+//						.prepareStatement("UPDATE orders_items SET fk_items_id= ?, fk_orders_id=?,quantity=? WHERE orders_items_id = ?");) {
+//			statement.setLong(1, ordersItems.getItems().getItemsId());
+//			statement.setLong(1, ordersItems.getOrders().getOrderId());
+//			statement.setLong(1, ordersItems.getQuantity());
+//			statement.executeUpdate();
+//			return read(ordersItems.getOrderItemsId());
+//		} catch (Exception e) {
+//			LOGGER.debug(e);
+//			LOGGER.error(e.getMessage());
+//		}
 		return null;
 	}
 
+	//Deletes an ordersitems record in the database
+	
 	@Override
 	public int delete(long ordersItemsId) {
 		try (Connection connection = DBUtils.getInstance().getConnection();

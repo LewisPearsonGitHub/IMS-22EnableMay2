@@ -1,7 +1,9 @@
-Coverage: 34%
+Coverage: 77.6%
 # Project Title
 
 This is the week 5 QA Academy Project to design an application that handles an Inventory Management System.
+
+Users can Create, Read, Update, and Delete records for Customers, Items, and Orders.
 
 ## Getting Started
 
@@ -81,7 +83,7 @@ We use [Git with GitHub](http://GitHub.com/) for version control.
 
 This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md) file for details 
 
-*For help in [Choosing a license](https://choosealicense.com/)*
+
 
 ## Acknowledgments
 

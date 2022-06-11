@@ -1,5 +1,5 @@
 Coverage: 72.8%
-# Project Title
+# Inventory Management System Project - Lewis Pearson
 
 This is the week 5 QA Academy Project to design an application that handles an Inventory Management System.
 
@@ -49,12 +49,15 @@ To ensure a fresh database, run the Schema file without running the SQL data fil
 ### Entity Relationship Diagrams
 
 ![Initial ERD](https://user-images.githubusercontent.com/105277446/173203716-4a4f2904-95b5-4cf6-a7fc-4e5e317254ee.png)
+
 An initial ERD was produced based upon the project specification, however this did not allow multiple items to be assigned to a single order as both items_id and orders_id are primary keys. Therefore this was developed into:
 
 ![Second ERD](https://user-images.githubusercontent.com/105277446/173203786-64d8d93e-baca-4802-94c4-cacecaf4e0ff.png)
+
 An intermediary table orders_items was created to allow this functionality and fulfill the project specification.
 
 ![Third ERD with quantity](https://user-images.githubusercontent.com/105277446/173203796-8a82e81f-8b32-4fe4-a13f-ddfa34978e74.png)
+
 A third diagram was created after it was realised that another row in one of the tables was required - quantity. This allows a total cost per order to be properly calculated.
 
 ## Running the tests
@@ -67,6 +70,11 @@ Current tests cover most of the CRUD functionality for the various tables throug
 
 Unit testing was done using both JUnit and Mockito. JUnit tests were conducted by comparing an expected output with the actual output, and Mockito was used to mock data, simulate the application with simulated data.
 
+Example of previous testing coverage.
+![image](https://user-images.githubusercontent.com/105277446/173204027-b6120958-4115-4216-80d1-0a7f702d0017.png)
+
+
+
 ## Usage
 
 Using the application is fairly straightforward, and it can be successfully navigated using the menu prompts. However, some things should be kept in mind. A customer must be created before an order can be created with a customer assigned to it. Additonally, a customer, item, and order must be created before a record in orders_items can be created. 
@@ -77,9 +85,22 @@ The total cost of an order will be displayed as null or 0 until items are assign
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 
-## Versioning
+## Continuous Integration
 
-We use [Git with GitHub](http://GitHub.com/) for version control.
+### Versioning
+
+[Git with GitHub](http://GitHub.com/) was used for version control. The main/dev/feature branch model was used with regular commits to keep track of progress and preserve work in case of data loss.
+
+![image](https://user-images.githubusercontent.com/105277446/173203942-2bbc11ef-0a5b-4c5c-83d5-76b434d92d71.png)
+![image](https://user-images.githubusercontent.com/105277446/173203947-cb7c0ef0-6315-4a80-a7d4-7d25a0e80ec5.png)
+
+### Project Management
+
+The project was managed through using a Scrum Board on Jira. User stories were created with tasks and story points assigned.
+
+![image](https://user-images.githubusercontent.com/105277446/173203997-5f654915-558d-4813-9825-380ab4ae0a67.png)
+![image](https://user-images.githubusercontent.com/105277446/173203999-08a33fcd-1f63-402d-80d3-5593325c5daa.png)
+
 
 ## Authors
 

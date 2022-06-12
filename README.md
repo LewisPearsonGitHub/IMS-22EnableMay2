@@ -100,6 +100,8 @@ The project was managed through using a Scrum Board on Jira. User stories were c
 
 ![image](https://user-images.githubusercontent.com/105277446/173203997-5f654915-558d-4813-9825-380ab4ae0a67.png)
 ![image](https://user-images.githubusercontent.com/105277446/173203999-08a33fcd-1f63-402d-80d3-5593325c5daa.png)
+![image](https://user-images.githubusercontent.com/105277446/173237607-7f52feb9-f230-414a-b4fd-82ecdd533284.png)
+
 
 
 ## Authors
